@@ -1,0 +1,33 @@
+services:
+  - type: web
+    name: questions-api
+    runtime: docker
+    dockerfilePath: ./Dockerfile
+    envVars:
+      - key: PGHOST
+        fromDatabase:
+          name: questions-db
+          property: host
+      - key: PGPORT
+        fromDatabase:
+          name: questions-db
+          property: port
+      - key: PGDATABASE
+        fromDatabase:
+          name: questions-db
+          property: database
+      - key: PGUSER
+        fromDatabase:
+          name: questions-db
+          property: user
+      - key: PGPASSWORD
+        fromDatabase:
+          name: questions-db
+          property: password
+
+databases:
+  - name: questions-db
+    plan: free
+    databaseName: questionsdb
+    user: questionsuser
+
